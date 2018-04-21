@@ -10,7 +10,7 @@
       "skipLibCheck": false,
       "sourceMap": true,
       "strictNullChecks": true,
-      "experimentalDecorators": true,
+      "experimentalDecorators": false,
       "emitDecoratorMetadata": true,
       "target": "es2017",
       "types" : [ "node" ],

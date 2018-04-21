@@ -21,14 +21,6 @@ let GameController = class GameController {
     allGames() {
         return { games: Object.values(data_1.default) };
     }
-    updateGame(id, body) {
-        console.log(`Incoming PUT body param:`, body);
-        return data_1.default[id];
-    }
-    createGame(body) {
-        console.log(`Incoming POST body param:`, body);
-        return body;
-    }
 };
 __decorate([
     routing_controllers_1.Get('/games/:id'),
@@ -43,22 +35,6 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Object)
 ], GameController.prototype, "allGames", null);
-__decorate([
-    routing_controllers_1.Put('/games/:id'),
-    __param(0, routing_controllers_1.Param('id')),
-    __param(1, Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object]),
-    __metadata("design:returntype", Object)
-], GameController.prototype, "updateGame", null);
-__decorate([
-    routing_controllers_1.Post('/games'),
-    HttpCode(201),
-    __param(0, Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Object)
-], GameController.prototype, "createGame", null);
 GameController = __decorate([
     routing_controllers_1.JsonController()
 ], GameController);

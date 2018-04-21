@@ -16,6 +16,7 @@ export default class GameController {
     allGames(): GameList {
         return {games: Object.values(gamesById)}
     }
+    /*
     @Put('/games/:id')
     updateGame(
         @Param('id') id: number,
@@ -31,5 +32,5 @@ export default class GameController {
     ): Game {
         console.log(`Incoming POST body param:`, body)
         return body
-}
+}*/
 }

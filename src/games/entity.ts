@@ -2,6 +2,11 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 
+const defaultBoard = [
+	['o', 'o', 'o'],
+	['o', 'o', 'o'],
+	['o', 'o', 'o']
+]
 
 @Entity()
 export default class Game extends BaseEntity {

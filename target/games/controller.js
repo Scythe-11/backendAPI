@@ -13,13 +13,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
-const data_1 = require("./data");
+const entity_1 = require("./entity");
 let GameController = class GameController {
     getGame(id) {
-        return data_1.default[id];
+        return entity_1.default.findOne(id);
     }
-    allGames() {
-        return { games: Object.values(data_1.default) };
+    async allGames() {
+        const games = await entity_1.default.find();
+        return { games };
     }
 };
 __decorate([
@@ -27,13 +28,13 @@ __decorate([
     __param(0, routing_controllers_1.Param('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Object)
+    __metadata("design:returntype", void 0)
 ], GameController.prototype, "getGame", null);
 __decorate([
     routing_controllers_1.Get('/games'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Object)
+    __metadata("design:returntype", Promise)
 ], GameController.prototype, "allGames", null);
 GameController = __decorate([
     routing_controllers_1.JsonController()

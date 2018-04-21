@@ -1,20 +1,22 @@
 // src/pages/controller.ts
 import { JsonController, Get, Put, Post, Param } from 'routing-controllers'
-import gamesById, { Game } from './data'
+import Game from './entity'
 
 @JsonController()
 export default class GameController {
 
     @Get('/games/:id')
     getGame(
-        @Param('id') id: number
-    ): Game {
-        return gamesById[id]
-    } 
+      @Param('id') id: number
+    ) {
+      return Game.findOne(id)
+    }
     
-    @Get('/games')
-    allGames(): GameList {
-        return {games: Object.values(gamesById)}
+    
+   @Get('/games')
+    async allGames() {
+    const games = await Game.find()
+    return { games }
     }
     /*
     @Put('/games/:id')

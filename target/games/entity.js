@@ -20,15 +20,15 @@ __decorate([
 __decorate([
     typeorm_1.Column('text', { nullable: false }),
     __metadata("design:type", String)
-], Game.prototype, "title", void 0);
+], Game.prototype, "name", void 0);
 __decorate([
     typeorm_1.Column('text', { nullable: false }),
     __metadata("design:type", String)
-], Game.prototype, "content", void 0);
+], Game.prototype, "color", void 0);
 __decorate([
     typeorm_1.Column('json', { nullable: false }),
     __metadata("design:type", String)
-], Game.prototype, "content", void 0);
+], Game.prototype, "board", void 0);
 Game = __decorate([
     typeorm_1.Entity()
 ], Game);

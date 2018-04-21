@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const BaseEntity_1 = require("typeorm/repository/BaseEntity");
 const class_validator_1 = require("class-validator");
+const colors = ["red", "green", 'blue', 'magenta', 'yellow'];
 let Game = class Game extends BaseEntity_1.BaseEntity {
 };
 __decorate([
@@ -24,7 +25,7 @@ __decorate([
     __metadata("design:type", String)
 ], Game.prototype, "name", void 0);
 __decorate([
-    class_validator_1.Contains('red', 'green', 'blue', 'magenta', 'yellow'),
+    class_validator_1.IsIn(colors),
     typeorm_1.Column('text', { nullable: false }),
     __metadata("design:type", String)
 ], Game.prototype, "color", void 0);

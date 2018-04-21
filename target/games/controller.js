@@ -14,6 +14,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
 const entity_1 = require("./entity");
+function Console(target) {
+    console.log(target);
+}
 let GameController = class GameController {
     getGame(id) {
         return entity_1.default.findOne(id);

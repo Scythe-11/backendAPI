@@ -2,6 +2,9 @@
 import { JsonController, Get, Put, Post, Param, Body, HttpCode } from 'routing-controllers'
 import Game from './entity'
 
+
+
+
 @JsonController()
 export default class GameController {
 
@@ -34,6 +37,10 @@ export default class GameController {
     @HttpCode(201)
     createGame(
       @Body() game: Game
+  /*    @Param('color') color: colors {
+        const colors = ['red', 'green', 'blue', 'magenta', 'yellow']
+        colors[Math.floor(Math.random() * colors.length)]
+      }*/
     ) {
       return game.save()
     }

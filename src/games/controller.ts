@@ -5,22 +5,17 @@ import {IsIn, IsNumber, IsString } from 'class-validator'
 
 
 const colors= ["red", "green", "blue", "magenta", "yellow"] 
+
 function setColor() {
     return colors[Math.floor(Math.random() * colors.length)]}
+    
 
-/*
-const game = new Game(); 
-game.color = defaultColor; 
-game.board = [
+const defaultBoard = [
 	['o', 'o', 'o'],
 	['o', 'o', 'o'],
 	['o', 'o', 'o']
-];*/
-
-function HasValue(update, value) {
-    if ((update.color === value) && (update.color IsIn(colors)) return update.game.color
-}
-
+]
+const gameBoard = () => {let gameBoard = JSON.stringify(defaultBoard); return JSON.parse(gameBoard)}
 
 @JsonController()
 export default class GameController {
@@ -48,9 +43,9 @@ export default class GameController {
 
     if (!game) throw new NotFoundError('Cannot find Game')
 
-    if (HasValue(update, "color") === true)
-    if (IsIn(game.color, colors) !== true) throw new NotFoundError('The color is not correct')
-
+        if (colors.indexOf(update.color) < -1) throw new NotFoundError('The color is not correct')
+        // the above function works in reverse? Not sure how to reverse it back....
+        //ie if red is typed - it rejects it, however if another color is typed it accepts
     return Game.merge(game, update).save()
     }
 
@@ -60,7 +55,8 @@ export default class GameController {
     createGame(
     @Body() game: Game   
     ) {
-       game.color = setColor()    
+        game.color = setColor() 
+        game.board = gameBoard()   
        return game.save()
     
     }

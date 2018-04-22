@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { IsString, IsIn } from 'class-validator'
 
-//const colors= ["red", "green", "blue", "magenta", "yellow"] 
+const colors= ["red", "green", "blue", "magenta", "yellow"] 
 
 @Entity()
 export default class Game extends BaseEntity {
@@ -15,7 +15,7 @@ export default class Game extends BaseEntity {
   @Column('text', {})
   name: string
 
- // @IsIn(colors)
+ @IsIn(colors)
   @Column('text', {})
   color: string
 

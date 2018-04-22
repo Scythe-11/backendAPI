@@ -14,8 +14,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
 const entity_1 = require("./entity");
-function Console(target) {
-    console.log(target);
+const class_validator_1 = require("class-validator");
+const colors = ["red", "green", "blue", "magenta", "yellow"];
+function setColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+function HasValue(update, value) {
+    if ((update.color === value) && (update.color))
+        class_validator_1.IsIn(colors);
+    return update.game.color;
 }
 let GameController = class GameController {
     getGame(id) {
@@ -28,10 +35,14 @@ let GameController = class GameController {
     async updateGame(id, update) {
         const game = await entity_1.default.findOne(id);
         if (!game)
-            throw new NotFoundError('Cannot find Game');
+            throw new routing_controllers_1.NotFoundError('Cannot find Game');
+        if (HasValue(update, "color") === true)
+            if (class_validator_1.IsIn(game.color, colors) !== true)
+                throw new routing_controllers_1.NotFoundError('The color is not correct');
         return entity_1.default.merge(game, update).save();
     }
     createGame(game) {
+        game.color = setColor();
         return game.save();
     }
 };

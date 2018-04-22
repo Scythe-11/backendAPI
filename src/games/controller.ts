@@ -1,12 +1,25 @@
 // src/pages/controller.ts
-import { JsonController, Get, Put, Post, Param, Body, HttpCode } from 'routing-controllers'
+import { JsonController, Get, Put, Post, Param, Body, HttpCode, NotFoundError } from 'routing-controllers'
 import Game from './entity'
+import {IsIn, IsNumber, IsString } from 'class-validator'
 
-function Console(target) {
-	console.log(target);
+
+const colors= ["red", "green", "blue", "magenta", "yellow"] 
+function setColor() {
+    return colors[Math.floor(Math.random() * colors.length)]}
+
+/*
+const game = new Game(); 
+game.color = defaultColor; 
+game.board = [
+	['o', 'o', 'o'],
+	['o', 'o', 'o'],
+	['o', 'o', 'o']
+];*/
+
+function HasValue(update, value) {
+    if ((update.color === value) && (update.color IsIn(colors)) return update.game.color
 }
-
-
 
 
 @JsonController()
@@ -19,20 +32,24 @@ export default class GameController {
       return Game.findOne(id)
     }
     
-    
    @Get('/games')
     async allGames() {
     const games = await Game.find()
     return { games }
     }
-    
+
+
    @Put('/games/:id')
     async updateGame(
     @Param('id') id: number,
     @Body() update: Partial<Game>
     ) {
     const game = await Game.findOne(id)
+
     if (!game) throw new NotFoundError('Cannot find Game')
+
+    if (HasValue(update, "color") === true)
+    if (IsIn(game.color, colors) !== true) throw new NotFoundError('The color is not correct')
 
     return Game.merge(game, update).save()
     }
@@ -42,12 +59,8 @@ export default class GameController {
     @HttpCode(201)
     createGame(
     @Body() game: Game   
-    //@Param('color') update: Partial<Game>   
     ) {
-
-     //   const colors = ['red', 'green', 'blue', 'magenta', 'yellow']
-      //  if ()
-       // return colors[Math.floor(Math.random() * colors.length)]  
+       game.color = setColor()    
        return game.save()
     
     }
